@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yellowball-dev-161145-authRole",
+      "UnauthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-dev-161145-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-dev-161145-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-yellowball-dev-161145-deployment",
+      "UnauthRoleName": "amplify-yellowball-dev-161145-unauthRole",
+      "StackName": "amplify-yellowball-dev-161145",
+      "StackId": "arn:aws:cloudformation:us-east-2:390200354117:stack/amplify-yellowball-dev-161145/485fd260-a747-11ee-b8a3-064fbb42ad6b",
+      "AmplifyAppId": "d2x14rm06naiqt"
+    },
+    "categories": {
+      "api": {
+        "yellowball": {}
+      }
+    }
+  }
+}
