@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../public/images/fire-ball.png";
+import logo from "../../public/images/fire-ball.png";
 
 const features = [
   {
