@@ -1,17 +1,20 @@
 {
-  "dev": {
+  "main": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-yellowball-dev-161145-authRole",
-      "UnauthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-dev-161145-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-dev-161145-authRole",
+      "AuthRoleName": "amplify-yellowball-main-154753-authRole",
+      "UnauthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-main-154753-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::390200354117:role/amplify-yellowball-main-154753-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-yellowball-dev-161145-deployment",
-      "UnauthRoleName": "amplify-yellowball-dev-161145-unauthRole",
-      "StackName": "amplify-yellowball-dev-161145",
-      "StackId": "arn:aws:cloudformation:us-east-2:390200354117:stack/amplify-yellowball-dev-161145/485fd260-a747-11ee-b8a3-064fbb42ad6b",
-      "AmplifyAppId": "d2x14rm06naiqt"
+      "DeploymentBucketName": "amplify-yellowball-main-154753-deployment",
+      "UnauthRoleName": "amplify-yellowball-main-154753-unauthRole",
+      "StackName": "amplify-yellowball-main-154753",
+      "StackId": "arn:aws:cloudformation:us-east-2:390200354117:stack/amplify-yellowball-main-154753/f4626150-acaa-11ee-bc05-062e0929acf3",
+      "AmplifyAppId": "d2uk2oq2p6loto"
     },
     "categories": {
+      "auth": {
+        "yellowballba708a54": {}
+      },
       "api": {
         "yellowball": {}
       }
