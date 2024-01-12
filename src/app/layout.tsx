@@ -1,14 +1,8 @@
-// Amplify Auth config
-import { Amplify } from "aws-amplify";
-import config from "../amplifyconfiguration.json";
-// End Amplify Auth config
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "../components/AuthProvider";
 
-Amplify.configure(config);
 
 const inter = Inter({ subsets: ["latin"] });
 
