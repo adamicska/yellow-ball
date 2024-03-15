@@ -1,7 +1,7 @@
 "use client";
 import { Suspense, useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, fetchAuthSession } from "aws-amplify/auth";
 import { AuthContext } from "../../../context/AuthContext";
 import { ProfileContext } from "../../../context/ProfileContext";
@@ -78,8 +78,8 @@ export default function Login() {
   });
 
   return (
-    <Card logo={true} title={"Login"}>
-      <Suspense>
+    <Suspense>
+      <Card logo={true} title={"Login"}>
         <Input
           type={"email"}
           id={"email"}
@@ -88,42 +88,43 @@ export default function Login() {
           setHook={setEmail}
           error={emailError}
         />
-      </Suspense>
-      <Input
-        type={"password"}
-        id={"password"}
-        value={password}
-        label={"Password"}
-        setHook={setPassword}
-        error={passError}
-      />
-      <div className="flex items-center justify-between">
-        <Link href={"/auth/pass-reset"}>
-          <p className="cursor-pointer text-sm font-medium text-black hover:underline">
-            Forgot password?
-          </p>
-        </Link>
-      </div>
-      {error?.length ? (
-        <div className="">
-          <p className="text-red-500 text-xs">{error}</p>
+
+        <Input
+          type={"password"}
+          id={"password"}
+          value={password}
+          label={"Password"}
+          setHook={setPassword}
+          error={passError}
+        />
+        <div className="flex items-center justify-between">
+          <Link href={"/auth/pass-reset"}>
+            <p className="cursor-pointer text-sm font-medium text-black hover:underline">
+              Forgot password?
+            </p>
+          </Link>
         </div>
-      ) : (
-        ""
-      )}
-      <LoaderButton
-        isLoading={isLoading}
-        text={"Login"}
-        handle={handleSignIn}
-      />
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Don&apos;t have an account yet?{" "}
-        <Link href={"/auth/signup"}>
-          <span className="cursor-pointer font-medium text-black dark:text-yellow-600 hover:underline">
-            Sign up
-          </span>
-        </Link>
-      </p>
-    </Card>
+        {error?.length ? (
+          <div className="">
+            <p className="text-red-500 text-xs">{error}</p>
+          </div>
+        ) : (
+          ""
+        )}
+        <LoaderButton
+          isLoading={isLoading}
+          text={"Login"}
+          handle={handleSignIn}
+        />
+        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+          Don&apos;t have an account yet?{" "}
+          <Link href={"/auth/signup"}>
+            <span className="cursor-pointer font-medium text-black dark:text-yellow-600 hover:underline">
+              Sign up
+            </span>
+          </Link>
+        </p>
+      </Card>
+    </Suspense>
   );
 }

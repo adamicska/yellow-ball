@@ -43,7 +43,7 @@ export default function VerifyEmail() {
     }
   }
   return (
-    <>
+    <Suspense>
       <Card logo={true} title={"Verify Your Email Address"}>
         <Input
           type={"text"}
@@ -66,17 +66,15 @@ export default function VerifyEmail() {
           handle={handleConfirmSignUp}
         />
       </Card>
-      <Suspense>
-        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-          Haven't received the code yet at {username}?
-          <button
-            onClick={(e) => resendConfirmationCode(e)}
-            className="font-medium hover:underline"
-          >
-            Resend code.
-          </button>
-        </p>
-      </Suspense>
-    </>
+      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+        Haven't received the code yet at {username}?
+        <button
+          onClick={(e) => resendConfirmationCode(e)}
+          className="font-medium hover:underline"
+        >
+          Resend code.
+        </button>
+      </p>
+    </Suspense>
   );
 }
