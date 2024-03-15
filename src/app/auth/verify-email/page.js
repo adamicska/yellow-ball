@@ -1,7 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import Card from "../../../components/common/Card";
 import LoaderButton from "../../../components/common/LoaderButton";
@@ -43,7 +43,7 @@ export default function VerifyEmail() {
     }
   }
   return (
-    <Suspense>
+    <>
       <Card logo={true} title={"Verify Your Email Address"}>
         <Input
           type={"text"}
@@ -75,6 +75,6 @@ export default function VerifyEmail() {
           Resend code.
         </button>
       </p>
-    </Suspense>
+    </>
   );
 }

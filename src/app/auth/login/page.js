@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, fetchAuthSession } from "aws-amplify/auth";
@@ -78,7 +78,6 @@ export default function Login() {
   });
 
   return (
-    <Suspense>
       <Card logo={true} title={"Login"}>
         <Input
           type={"email"}
@@ -125,6 +124,5 @@ export default function Login() {
           </Link>
         </p>
       </Card>
-    </Suspense>
   );
 }
