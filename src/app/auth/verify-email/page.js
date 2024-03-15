@@ -1,7 +1,7 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { confirmSignUp, resendSignUpCode } from "aws-amplify/auth";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 import Card from "../../../components/common/Card";
 import LoaderButton from "../../../components/common/LoaderButton";
@@ -66,15 +66,17 @@ export default function VerifyEmail() {
           handle={handleConfirmSignUp}
         />
       </Card>
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Haven't received the code yet?{" "}
-        <button
-          onClick={(e) => resendConfirmationCode(e)}
-          className="font-medium hover:underline"
-        >
-          Resend code.
-        </button>
-      </p>
+      <Suspense>
+        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+          Haven't received the code yet at {username}?
+          <button
+            onClick={(e) => resendConfirmationCode(e)}
+            className="font-medium hover:underline"
+          >
+            Resend code.
+          </button>
+        </p>
+      </Suspense>
     </>
   );
 }

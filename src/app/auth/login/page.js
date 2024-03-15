@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, fetchAuthSession } from "aws-amplify/auth";
@@ -12,6 +12,9 @@ import Input from "../../../components/common/Input";
 
 export default function Login() {
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+  const username = searchParams.get("user");
 
   const [user, setUser] = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -70,16 +73,22 @@ export default function Login() {
     }
   }
 
+  useEffect(() => {
+    setEmail(username);
+  });
+
   return (
     <Card logo={true} title={"Login"}>
-      <Input
-        type={"email"}
-        id={"email"}
-        value={email}
-        label={"Email"}
-        setHook={setEmail}
-        error={emailError}
-      />
+      <Suspense>
+        <Input
+          type={"email"}
+          id={"email"}
+          value={email}
+          label={"Email"}
+          setHook={setEmail}
+          error={emailError}
+        />
+      </Suspense>
       <Input
         type={"password"}
         id={"password"}

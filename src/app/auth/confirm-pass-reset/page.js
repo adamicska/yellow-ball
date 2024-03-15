@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { confirmResetPassword } from "aws-amplify/auth";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Card from "../../../components/common/Card";
@@ -40,9 +40,11 @@ export default function ConfirmPassReset() {
 
   return (
     <Card logo={true} title={"Reset Password"}>
-      <div className="">
-        <p className="text-black text-xs">{`Confirmation code sent to ${email}`}</p>
-      </div>
+      <Suspense>
+        <div className="">
+          <p className="text-black text-xs">{`Confirmation code sent to ${email}`}</p>
+        </div>
+      </Suspense>
       <Input
         type={"text"}
         id={"code"}
@@ -67,7 +69,9 @@ export default function ConfirmPassReset() {
       )}
       {res.length ? (
         <div className="flex">
-          <p className="text-gray-600 dark:text-gray-100 hover:text-black dark:hover:text-white text-sm">{res},</p>
+          <p className="text-gray-600 dark:text-gray-100 hover:text-black dark:hover:text-white text-sm">
+            {res},
+          </p>
           <Link href={"/auth/login"}>
             <span className="cursor-pointer ml-2 underline text-sm font-bold">
               login.
