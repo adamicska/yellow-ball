@@ -43,14 +43,14 @@ export default function PasswordReset() {
 
       {error.length ? (
         <div className="">
-          <p className="text-branding-red text-xs">{error}</p>
+          <p className="text-red-500 text-xs">{error}</p>
         </div>
       ) : (
         ""
       )}
       {res.length ? (
         <div className="">
-          <p className="text-branding-green text-xs">{res}</p>
+          <p className="text-black text-xs">{res}</p>
         </div>
       ) : (
         ""

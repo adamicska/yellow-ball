@@ -48,14 +48,14 @@ export default function VerifyEmail() {
         <Input
           type={"text"}
           id={"code"}
-          value={code}
+          value={confirmationCode}
           label={"Confirmation Code"}
           setHook={setCode}
           error={error}
         />
         {message.length ? (
           <div className="">
-            <p className="text-branding-blue text-xs">{message}</p>
+            <p className="text-b text-xs">{message}</p>
           </div>
         ) : (
           ""
@@ -70,7 +70,7 @@ export default function VerifyEmail() {
         Haven't received the code yet?{" "}
         <button
           onClick={(e) => resendConfirmationCode(e)}
-          className="font-medium text-branding-red hover:underline"
+          className="font-medium hover:underline"
         >
           Resend code.
         </button>

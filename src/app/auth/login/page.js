@@ -49,12 +49,15 @@ export default function Login() {
         });
 
         useUser();
+        router.push("/user");
       } catch (error) {
         setError(
           error.message === "User does not exist."
             ? "Incorrect username or password."
             : error.message
         );
+        if (error.message === "There is already a signed in user.")
+          router.push("/user");
         if (!error.message) setError("Error signing in.");
         setIsLoading(false);
       }
@@ -87,14 +90,14 @@ export default function Login() {
       />
       <div className="flex items-center justify-between">
         <Link href={"/auth/pass-reset"}>
-          <p className="cursor-pointer text-sm font-medium text-branding-red hover:underline">
+          <p className="cursor-pointer text-sm font-medium text-black hover:underline">
             Forgot password?
           </p>
         </Link>
       </div>
-      {error.length ? (
+      {error?.length ? (
         <div className="">
-          <p className="text-branding-red text-xs">{error}</p>
+          <p className="text-red-500 text-xs">{error}</p>
         </div>
       ) : (
         ""
@@ -106,7 +109,7 @@ export default function Login() {
       />
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
         Don&apos;t have an account yet?{" "}
-        <Link href={"/auth/register"}>
+        <Link href={"/auth/signup"}>
           <span className="cursor-pointer font-medium text-black dark:text-yellow-600 hover:underline">
             Sign up
           </span>

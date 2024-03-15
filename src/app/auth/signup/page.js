@@ -4,6 +4,7 @@ import { signUp } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import Input from "@/components/common/Input";
 import Card from "../../../components/common/Card";
 import LoaderButton from "../../../components/common/LoaderButton";
 
@@ -33,7 +34,7 @@ export default function Signup() {
     if (!terms) {
       setError("Please agree to our terms.");
     }
-    if (password === password2 && email.length && password.length && terms) {
+    if (email.length && password.length && terms) {
       setIsLoading(true);
       // Auth Signup
       try {
@@ -87,7 +88,7 @@ export default function Signup() {
             id="terms"
             aria-describedby="terms"
             type="checkbox"
-            className="w-4 h-4 border text-branding-green border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-branding-red dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-branding-red dark:ring-offset-branding-red"
+            className="w-4 h-4 border text-green-500 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-black dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-white dark:ring-offset-white"
             required
             value={terms}
             onChange={() => setTerms(!terms)}
@@ -100,7 +101,7 @@ export default function Signup() {
           >
             I accept the{" "}
             <Link
-              className="font-medium text-branding-red hover:underline dark:text-branding-red"
+              className="font-medium text-black hover:underline dark:text-white"
               href="/terms-and-conditions"
             >
               Terms and Conditions
@@ -110,7 +111,7 @@ export default function Signup() {
       </div>
       {error.length ? (
         <div className="">
-          <p className="text-branding-red text-xs">{error}</p>
+          <p className="text-red-500 text-xs">{error}</p>
         </div>
       ) : (
         ""

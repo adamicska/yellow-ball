@@ -41,7 +41,7 @@ export default function ConfirmPassReset() {
   return (
     <Card logo={true} title={"Reset Password"}>
       <div className="">
-        <p className="text-branding-green text-xs">{`Confirmation code sent to ${email}`}</p>
+        <p className="text-black text-xs">{`Confirmation code sent to ${email}`}</p>
       </div>
       <Input
         type={"text"}
@@ -60,16 +60,16 @@ export default function ConfirmPassReset() {
 
       {error.length ? (
         <div className="">
-          <p className="text-branding-red text-xs">{error}</p>
+          <p className="text-red-500 text-xs">{error}</p>
         </div>
       ) : (
         ""
       )}
       {res.length ? (
         <div className="flex">
-          <p className="text-gray-600 dark:text-gray-100 text-sm">{res},</p>
+          <p className="text-gray-600 dark:text-gray-100 hover:text-black dark:hover:text-white text-sm">{res},</p>
           <Link href={"/auth/login"}>
-            <span className="cursor-pointer ml-2 text-branding-green underline text-sm font-bold">
+            <span className="cursor-pointer ml-2 underline text-sm font-bold">
               login.
             </span>
           </Link>
