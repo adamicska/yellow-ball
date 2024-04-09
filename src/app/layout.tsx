@@ -11,16 +11,16 @@ import Footer from "../components/layout/FooterNav";
 // });
 
 export const metadata = {
-  title: "BugZero's Operational Defect Database",
-  description: "First database for all vendor operational defects and bugs",
+  title: "YellowBall",
+  description: "Join YellowBall Club to play tennis, meet new players, compete and earn!",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "BugZero's Operational Defect Database",
-  alternateName: "ODD",
-  url: "https://odd.findbugzero.com/",
+  name: "YellowBall Club",
+  alternateName: "YellowBall",
+  url: "https://www.yellowball.club/",
 };
 
 export default function RootLayout({

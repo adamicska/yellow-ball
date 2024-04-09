@@ -73,6 +73,7 @@ export default function Signup() {
         label={"Email"}
         setHook={setEmail}
         error={emailError}
+        required={true}
       />
       <Input
         type={"password"}
@@ -81,6 +82,7 @@ export default function Signup() {
         label={"Password"}
         setHook={setPassword}
         error={passError}
+        required={true}
       />
       <div className="flex items-start">
         <div className="flex items-center h-5">

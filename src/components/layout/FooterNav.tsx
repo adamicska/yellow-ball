@@ -2,7 +2,7 @@ import { Footer } from "flowbite-react";
 
 export default function FooterNav() {
   return (
-    <div className="absolute bottom-0 left-0 w-full">
+    <div className="w-full">
       <Footer container>
         <Footer.Copyright href="#" by="YellowBall" year={2024} />
         <Footer.LinkGroup>
