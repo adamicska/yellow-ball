@@ -11,7 +11,7 @@ import Button from "../common/Button";
 
 export default function TopNav() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className="fixed w-full z-20 top-0 start-0">
       <NavbarBrand href="/">
         {/* <Image src={logo} className="mr-3 h-8 w-12" alt="YellowBall Logo" /> */}
         <svg className="mr-3 h-6 w-6 text-black"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

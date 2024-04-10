@@ -76,8 +76,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full h-56">
-          <Image className="object-fill" src={court} alt="tennis court" />
+        <div className="relative w-full h-56">
+          <Image
+            className="object-cover object-top"
+            src={court}
+            alt="tennis court"
+            placeholder="blur"
+            fill
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcLyu5HgADvgGGs/qVigAAAABJRU5ErkJggg=="
+          />
         </div>
       </div>
       <div className="mt-10 py-12">

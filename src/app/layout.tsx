@@ -39,7 +39,7 @@ export default function RootLayout({
 
       <body>
         {/* <div className={geoFont.variable}> */}
-        <div className="static min-h-screen">
+        <div className="static min-h-screen bg-white dark:bg-gray-800">
           {/* Create CC Provider with all the context state */}
           <ContextProvider>
             <TopNav />
