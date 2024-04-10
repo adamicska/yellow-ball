@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/images/fire-ball.png";
+import court from "../../public/images/clay-court.jpg";
 
 const features = [
   {
@@ -21,92 +21,72 @@ const features = [
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
     icon: "<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5} stroke='currentColor' className='w-6 h-6'><path strokeLinecap='round' strokeLinejoin='round' d='M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819' /></svg>",
   },
-  // {
-  //   name: "Mobile notifications",
-  //   description:
-  //     "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-  //   icon: AnnotationIcon,
-  // },
 ];
 
 export default function Home() {
   return (
-    <div className="bg-gray-900">
-      <div className="relative bg-gray-900 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid sm:grid-cols-2">
-            <div className="relative pb-8 bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-              <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                <div className="sm:text-center lg:text-left">
-                  <h1 className="mb-6 text-4xl tracking-tight font-extrabold text-gray-100 sm:text-5xl md:text-6xl">
-                    YellowBall Club
-                  </h1>
-                  <h2 className="text-xl tracking-tight font-extrabold text-gray-100 sm:text-2xl md:text-3xl">
-                    <span className="block xl:inline">Connect with other</span>{" "}
-                    <span className="block text-yellow-500 xl:inline">
-                      tennis & padel
-                    </span>{" "}
-                    players
-                  </h2>
-                  <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Look for other tennis players near you today! You can see
-                    who plays in your town, make new friends, search by level,
-                    find a coach, organize tournaments, and more!
-                  </p>
-                  <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                    <div className="rounded-md shadow">
-                      <Link
-                        href="/auth/login"
-                        className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-gray-800 bg-yellow-400 hover:bg-yellow-600 "
-                      >
-                        Login
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"
-                          />
-                        </svg>
-                      </Link>
-                    </div>
-                    <div className="mt-3 sm:mt-0 sm:ml-3">
-                      <Link
-                        href="/auth/signup"
-                        className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-purple-700 hover:bg-purple-900"
-                      >
-                        Sign up
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </main>
+    <div className="bg-white dark:bg-gray-900">
+      <div className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 md:py-16 lg:py-20 lg:px-8 xl:py-28 text-center mx-auto">
+          <h1 className="mb-6 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-5xl md:text-6xl">
+            YellowBall Club
+          </h1>
+          <h2 className="text-xl tracking-tight font-extrabold text-gray-700 dark:text-gray-100 sm:text-2xl md:text-3xl">
+            <span className="block xl:inline">Connect with other</span>{" "}
+            <span className="block text-yellow-500 xl:inline">
+              tennis & padel
+            </span>{" "}
+            players
+          </h2>
+          <p className="mt-3 text-base text-gray-500 sm:py-5 sm:text-lg sm:max-w-xl md:text-xl mx-auto">
+            Look for other tennis players near you today! You can see who plays
+            in your town, make new friends, search by level, find a coach,
+            organize tournaments, and more!
+          </p>
+          <div className="mt-5 sm:mt-8 sm:flex justify-center">
+            <div className="rounded-md shadow">
+              <Link
+                href="/auth/login"
+                className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-black bg-gray-100 hover:bg-gray-200 "
+              >
+                Login
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25"
+                  />
+                </svg>
+              </Link>
             </div>
-            <div className="flex items-center justify-center">
-              <Image
-                // className="w-full h-full"
-                src={logo}
-                alt="tennis background"
-                width={"500"}
-                height={"500"}
-              />
+            <div className="mt-3 sm:mt-0 sm:ml-3">
+              <Link
+                href="/auth/signup"
+                className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-gray-800"
+              >
+                Sign up
+              </Link>
             </div>
           </div>
         </div>
+        <div className="w-full h-56">
+          <Image className="object-fill" src={court} alt="tennis court" />
+        </div>
       </div>
-      <div className="mt-10 py-12 bg-gray-900">
+      <div className="mt-10 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:text-center">
             <h2 className="text-base text-yellow-500 font-semibold tracking-wide uppercase">
               Features
             </h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-100 sm:text-4xl">
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-black dark:text-gray-100 sm:text-4xl">
               A better way to play tennis
             </p>
             <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
@@ -120,10 +100,10 @@ export default function Home() {
               {features.map((feature) => (
                 <div
                   key={feature.name}
-                  className="relative shadow-lg hover:shadow-2xl rounded-md p-4 bg-gray-800 border border-gray-700"
+                  className="relative shadow rounded-md p-8 hover:border hover:border-gray-700"
                 >
                   <dt>
-                    <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-yellow-500 text-gray-100">
+                    <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-black text-white">
                       <div
                         className="h-6 w-6"
                         dangerouslySetInnerHTML={{ __html: feature.icon }}

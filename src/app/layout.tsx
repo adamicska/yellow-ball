@@ -1,12 +1,12 @@
 import "./globals.css";
 import ContextProvider from "../context/ContextProvider";
 import "./globals.css";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import TopNav from "../components/layout/TopNav";
 import Footer from "../components/layout/FooterNav";
 
 // const geoFont = localFont({
-//   src: "../styles/Geogrotesque_SemiBold.ttf",
+//   src: "../styles/",
 //   variable: "--font-geo",
 // });
 
@@ -39,7 +39,7 @@ export default function RootLayout({
 
       <body>
         {/* <div className={geoFont.variable}> */}
-        <div className="static">
+        <div className="static min-h-screen">
           {/* Create CC Provider with all the context state */}
           <ContextProvider>
             <TopNav />
