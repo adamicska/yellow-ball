@@ -25,7 +25,7 @@ const features = [
 
 export default function Home() {
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="bg-white dark:bg-gray-900 pt-8">
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 md:py-16 lg:py-20 lg:px-8 xl:py-28 text-center mx-auto">
           <h1 className="mb-6 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-5xl md:text-6xl">
