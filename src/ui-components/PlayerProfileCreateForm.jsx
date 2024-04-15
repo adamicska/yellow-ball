@@ -7,178 +7,16 @@
 /* eslint-disable */
 import * as React from "react";
 import {
-  Badge,
   Button,
-  Divider,
   Flex,
   Grid,
-  Icon,
-  ScrollView,
   SwitchField,
-  Text,
-  TextAreaField,
   TextField,
-  useTheme,
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
 import { createPlayerProfile } from "../graphql/mutations";
 const client = generateClient();
-function ArrayField({
-  items = [],
-  onChange,
-  label,
-  inputFieldRef,
-  children,
-  hasError,
-  setFieldValue,
-  currentFieldValue,
-  defaultFieldValue,
-  lengthLimit,
-  getBadgeText,
-  runValidationTasks,
-  errorMessage,
-}) {
-  const labelElement = <Text>{label}</Text>;
-  const {
-    tokens: {
-      components: {
-        fieldmessages: { error: errorStyles },
-      },
-    },
-  } = useTheme();
-  const [selectedBadgeIndex, setSelectedBadgeIndex] = React.useState();
-  const [isEditing, setIsEditing] = React.useState();
-  React.useEffect(() => {
-    if (isEditing) {
-      inputFieldRef?.current?.focus();
-    }
-  }, [isEditing]);
-  const removeItem = async (removeIndex) => {
-    const newItems = items.filter((value, index) => index !== removeIndex);
-    await onChange(newItems);
-    setSelectedBadgeIndex(undefined);
-  };
-  const addItem = async () => {
-    const { hasError } = runValidationTasks();
-    if (
-      currentFieldValue !== undefined &&
-      currentFieldValue !== null &&
-      currentFieldValue !== "" &&
-      !hasError
-    ) {
-      const newItems = [...items];
-      if (selectedBadgeIndex !== undefined) {
-        newItems[selectedBadgeIndex] = currentFieldValue;
-        setSelectedBadgeIndex(undefined);
-      } else {
-        newItems.push(currentFieldValue);
-      }
-      await onChange(newItems);
-      setIsEditing(false);
-    }
-  };
-  const arraySection = (
-    <React.Fragment>
-      {!!items?.length && (
-        <ScrollView height="inherit" width="inherit" maxHeight={"7rem"}>
-          {items.map((value, index) => {
-            return (
-              <Badge
-                key={index}
-                style={{
-                  cursor: "pointer",
-                  alignItems: "center",
-                  marginRight: 3,
-                  marginTop: 3,
-                  backgroundColor:
-                    index === selectedBadgeIndex ? "#B8CEF9" : "",
-                }}
-                onClick={() => {
-                  setSelectedBadgeIndex(index);
-                  setFieldValue(items[index]);
-                  setIsEditing(true);
-                }}
-              >
-                {getBadgeText ? getBadgeText(value) : value.toString()}
-                <Icon
-                  style={{
-                    cursor: "pointer",
-                    paddingLeft: 3,
-                    width: 20,
-                    height: 20,
-                  }}
-                  viewBox={{ width: 20, height: 20 }}
-                  paths={[
-                    {
-                      d: "M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z",
-                      stroke: "black",
-                    },
-                  ]}
-                  ariaLabel="button"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    removeItem(index);
-                  }}
-                />
-              </Badge>
-            );
-          })}
-        </ScrollView>
-      )}
-      <Divider orientation="horizontal" marginTop={5} />
-    </React.Fragment>
-  );
-  if (lengthLimit !== undefined && items.length >= lengthLimit && !isEditing) {
-    return (
-      <React.Fragment>
-        {labelElement}
-        {arraySection}
-      </React.Fragment>
-    );
-  }
-  return (
-    <React.Fragment>
-      {labelElement}
-      {isEditing && children}
-      {!isEditing ? (
-        <>
-          <Button
-            onClick={() => {
-              setIsEditing(true);
-            }}
-          >
-            Add item
-          </Button>
-          {errorMessage && hasError && (
-            <Text color={errorStyles.color} fontSize={errorStyles.fontSize}>
-              {errorMessage}
-            </Text>
-          )}
-        </>
-      ) : (
-        <Flex justifyContent="flex-end">
-          {(currentFieldValue || isEditing) && (
-            <Button
-              children="Cancel"
-              type="button"
-              size="small"
-              onClick={() => {
-                setFieldValue(defaultFieldValue);
-                setIsEditing(false);
-                setSelectedBadgeIndex(undefined);
-              }}
-            ></Button>
-          )}
-          <Button size="small" variation="link" onClick={addItem}>
-            {selectedBadgeIndex !== undefined ? "Save" : "Add"}
-          </Button>
-        </Flex>
-      )}
-      {arraySection}
-    </React.Fragment>
-  );
-}
 export default function PlayerProfileCreateForm(props) {
   const {
     clearOnSuccess = true,
@@ -194,59 +32,37 @@ export default function PlayerProfileCreateForm(props) {
     country: "",
     province: "",
     city: "",
-    pic: "",
     level: "",
     active: false,
-    following: [],
-    followers: [],
-    visiting: "",
     Bio: "",
-    sub: "",
+    userId: "",
   };
   const [country, setCountry] = React.useState(initialValues.country);
   const [province, setProvince] = React.useState(initialValues.province);
   const [city, setCity] = React.useState(initialValues.city);
-  const [pic, setPic] = React.useState(initialValues.pic);
   const [level, setLevel] = React.useState(initialValues.level);
   const [active, setActive] = React.useState(initialValues.active);
-  const [following, setFollowing] = React.useState(initialValues.following);
-  const [followers, setFollowers] = React.useState(initialValues.followers);
-  const [visiting, setVisiting] = React.useState(initialValues.visiting);
   const [Bio, setBio] = React.useState(initialValues.Bio);
-  const [sub, setSub] = React.useState(initialValues.sub);
+  const [userId, setUserId] = React.useState(initialValues.userId);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setCountry(initialValues.country);
     setProvince(initialValues.province);
     setCity(initialValues.city);
-    setPic(initialValues.pic);
     setLevel(initialValues.level);
     setActive(initialValues.active);
-    setFollowing(initialValues.following);
-    setCurrentFollowingValue("");
-    setFollowers(initialValues.followers);
-    setCurrentFollowersValue("");
-    setVisiting(initialValues.visiting);
     setBio(initialValues.Bio);
-    setSub(initialValues.sub);
+    setUserId(initialValues.userId);
     setErrors({});
   };
-  const [currentFollowingValue, setCurrentFollowingValue] = React.useState("");
-  const followingRef = React.createRef();
-  const [currentFollowersValue, setCurrentFollowersValue] = React.useState("");
-  const followersRef = React.createRef();
   const validations = {
-    country: [],
+    country: [{ type: "Required" }],
     province: [],
-    city: [],
-    pic: [],
-    level: [],
-    active: [],
-    following: [{ type: "JSON" }],
-    followers: [{ type: "JSON" }],
-    visiting: [],
+    city: [{ type: "Required" }],
+    level: [{ type: "Required" }],
+    active: [{ type: "Required" }],
     Bio: [],
-    sub: [],
+    userId: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -277,14 +93,10 @@ export default function PlayerProfileCreateForm(props) {
           country,
           province,
           city,
-          pic,
           level,
           active,
-          following,
-          followers,
-          visiting,
           Bio,
-          sub,
+          userId,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -340,7 +152,7 @@ export default function PlayerProfileCreateForm(props) {
     >
       <TextField
         label="Country"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={country}
         onChange={(e) => {
@@ -350,14 +162,10 @@ export default function PlayerProfileCreateForm(props) {
               country: value,
               province,
               city,
-              pic,
               level,
               active,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -384,14 +192,10 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province: value,
               city,
-              pic,
               level,
               active,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.province ?? value;
@@ -408,7 +212,7 @@ export default function PlayerProfileCreateForm(props) {
       ></TextField>
       <TextField
         label="City"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         value={city}
         onChange={(e) => {
@@ -418,14 +222,10 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province,
               city: value,
-              pic,
               level,
               active,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -441,42 +241,8 @@ export default function PlayerProfileCreateForm(props) {
         {...getOverrideProps(overrides, "city")}
       ></TextField>
       <TextField
-        label="Pic"
-        isRequired={false}
-        isReadOnly={false}
-        value={pic}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              country,
-              province,
-              city,
-              pic: value,
-              level,
-              active,
-              following,
-              followers,
-              visiting,
-              Bio,
-              sub,
-            };
-            const result = onChange(modelFields);
-            value = result?.pic ?? value;
-          }
-          if (errors.pic?.hasError) {
-            runValidationTasks("pic", value);
-          }
-          setPic(value);
-        }}
-        onBlur={() => runValidationTasks("pic", pic)}
-        errorMessage={errors.pic?.errorMessage}
-        hasError={errors.pic?.hasError}
-        {...getOverrideProps(overrides, "pic")}
-      ></TextField>
-      <TextField
         label="Level"
-        isRequired={false}
+        isRequired={true}
         isReadOnly={false}
         type="number"
         step="any"
@@ -490,14 +256,10 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province,
               city,
-              pic,
               level: value,
               active,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.level ?? value;
@@ -524,14 +286,10 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province,
               city,
-              pic,
               level,
               active: value,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.active ?? value;
@@ -546,150 +304,6 @@ export default function PlayerProfileCreateForm(props) {
         hasError={errors.active?.hasError}
         {...getOverrideProps(overrides, "active")}
       ></SwitchField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              country,
-              province,
-              city,
-              pic,
-              level,
-              active,
-              following: values,
-              followers,
-              visiting,
-              Bio,
-              sub,
-            };
-            const result = onChange(modelFields);
-            values = result?.following ?? values;
-          }
-          setFollowing(values);
-          setCurrentFollowingValue("");
-        }}
-        currentFieldValue={currentFollowingValue}
-        label={"Following"}
-        items={following}
-        hasError={errors?.following?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("following", currentFollowingValue)
-        }
-        errorMessage={errors?.following?.errorMessage}
-        setFieldValue={setCurrentFollowingValue}
-        inputFieldRef={followingRef}
-        defaultFieldValue={""}
-      >
-        <TextAreaField
-          label="Following"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentFollowingValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.following?.hasError) {
-              runValidationTasks("following", value);
-            }
-            setCurrentFollowingValue(value);
-          }}
-          onBlur={() => runValidationTasks("following", currentFollowingValue)}
-          errorMessage={errors.following?.errorMessage}
-          hasError={errors.following?.hasError}
-          ref={followingRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "following")}
-        ></TextAreaField>
-      </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              country,
-              province,
-              city,
-              pic,
-              level,
-              active,
-              following,
-              followers: values,
-              visiting,
-              Bio,
-              sub,
-            };
-            const result = onChange(modelFields);
-            values = result?.followers ?? values;
-          }
-          setFollowers(values);
-          setCurrentFollowersValue("");
-        }}
-        currentFieldValue={currentFollowersValue}
-        label={"Followers"}
-        items={followers}
-        hasError={errors?.followers?.hasError}
-        runValidationTasks={async () =>
-          await runValidationTasks("followers", currentFollowersValue)
-        }
-        errorMessage={errors?.followers?.errorMessage}
-        setFieldValue={setCurrentFollowersValue}
-        inputFieldRef={followersRef}
-        defaultFieldValue={""}
-      >
-        <TextAreaField
-          label="Followers"
-          isRequired={false}
-          isReadOnly={false}
-          value={currentFollowersValue}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.followers?.hasError) {
-              runValidationTasks("followers", value);
-            }
-            setCurrentFollowersValue(value);
-          }}
-          onBlur={() => runValidationTasks("followers", currentFollowersValue)}
-          errorMessage={errors.followers?.errorMessage}
-          hasError={errors.followers?.hasError}
-          ref={followersRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "followers")}
-        ></TextAreaField>
-      </ArrayField>
-      <TextField
-        label="Visiting"
-        isRequired={false}
-        isReadOnly={false}
-        value={visiting}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              country,
-              province,
-              city,
-              pic,
-              level,
-              active,
-              following,
-              followers,
-              visiting: value,
-              Bio,
-              sub,
-            };
-            const result = onChange(modelFields);
-            value = result?.visiting ?? value;
-          }
-          if (errors.visiting?.hasError) {
-            runValidationTasks("visiting", value);
-          }
-          setVisiting(value);
-        }}
-        onBlur={() => runValidationTasks("visiting", visiting)}
-        errorMessage={errors.visiting?.errorMessage}
-        hasError={errors.visiting?.hasError}
-        {...getOverrideProps(overrides, "visiting")}
-      ></TextField>
       <TextField
         label="Bio"
         isRequired={false}
@@ -702,14 +316,10 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province,
               city,
-              pic,
               level,
               active,
-              following,
-              followers,
-              visiting,
               Bio: value,
-              sub,
+              userId,
             };
             const result = onChange(modelFields);
             value = result?.Bio ?? value;
@@ -725,10 +335,10 @@ export default function PlayerProfileCreateForm(props) {
         {...getOverrideProps(overrides, "Bio")}
       ></TextField>
       <TextField
-        label="Sub"
-        isRequired={false}
+        label="User id"
+        isRequired={true}
         isReadOnly={false}
-        value={sub}
+        value={userId}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -736,27 +346,23 @@ export default function PlayerProfileCreateForm(props) {
               country,
               province,
               city,
-              pic,
               level,
               active,
-              following,
-              followers,
-              visiting,
               Bio,
-              sub: value,
+              userId: value,
             };
             const result = onChange(modelFields);
-            value = result?.sub ?? value;
+            value = result?.userId ?? value;
           }
-          if (errors.sub?.hasError) {
-            runValidationTasks("sub", value);
+          if (errors.userId?.hasError) {
+            runValidationTasks("userId", value);
           }
-          setSub(value);
+          setUserId(value);
         }}
-        onBlur={() => runValidationTasks("sub", sub)}
-        errorMessage={errors.sub?.errorMessage}
-        hasError={errors.sub?.hasError}
-        {...getOverrideProps(overrides, "sub")}
+        onBlur={() => runValidationTasks("userId", userId)}
+        errorMessage={errors.userId?.errorMessage}
+        hasError={errors.userId?.hasError}
+        {...getOverrideProps(overrides, "userId")}
       ></TextField>
       <Flex
         justifyContent="space-between"

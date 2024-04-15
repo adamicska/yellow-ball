@@ -30,7 +30,7 @@ export default function Login() {
       const session = await fetchAuthSession();
       const t = session?.tokens?.idToken?.toString();
       setUser(t);
-      console.log("session", t);
+      // console.log("session", t);
       return t;
     } catch (e) {
       console.log(e);
@@ -52,7 +52,7 @@ export default function Login() {
         });
 
         useUser();
-        router.push("/user/profile");
+        router.push(`/user/${username}/profile/`);
       } catch (error) {
         setError(
           error.message === "User does not exist."
@@ -60,7 +60,7 @@ export default function Login() {
             : error.message
         );
         if (error.message === "There is already a signed in user.")
-          router.push("/user/profile");
+          router.push(`/user/${username}/profile/`);
         if (!error.message) setError("Error signing in.");
         setIsLoading(false);
       }

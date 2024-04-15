@@ -1,12 +1,17 @@
+"use client";
+import { useContext } from "react";
 import Link from "next/link";
 import { Footer } from "flowbite-react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function FooterMobileNav() {
+  const [user, setUser] = useContext(AuthContext);
+
   return (
     <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white bottom-0 left-1/2 dark:bg-gray-700">
       <Footer container>
         <div className="mx-auto grid grid-cols-4 items-center gap-10">
-          <Link href="/user/feed" className="mx-auto">
+          <Link href={`/user/${user.username}/feed/`} className="mx-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -22,7 +27,7 @@ export default function FooterMobileNav() {
               />
             </svg>
           </Link>
-          <Link href="/user/profile" className="mx-auto">
+          <Link href={`/user/${user.username}/profile/`} className="mx-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -38,7 +43,7 @@ export default function FooterMobileNav() {
               />
             </svg>
           </Link>
-          <Link href="/user/search" className="mx-auto">
+          <Link href={`/user/${user.username}/search/`} className="mx-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -55,7 +60,7 @@ export default function FooterMobileNav() {
             </svg>
           </Link>
           {/* <Link href="#" className="mx-auto">Stats</Link> */}
-          <Link href="/user/chat" className="mx-auto">
+          <Link href={`/user/${user.username}/chat/`} className="mx-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

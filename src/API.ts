@@ -2,50 +2,30 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreatePlayerProfileInput = {
-  id?: string | null,
-  country?: string | null,
+export type CreatePlayerInput = {
+  userId: string,
+  country: string,
   province?: string | null,
   city?: string | null,
-  pic?: string | null,
-  raquet?: RaquetInput | null,
-  strings?: StringsInput | null,
-  level?: number | null,
-  active?: boolean | null,
-  following?: Array< string | null > | null,
-  followers?: Array< string | null > | null,
-  visiting?: string | null,
+  racquet?: string | null,
+  strings?: string | null,
+  level: number,
+  active: boolean,
   Bio?: string | null,
-  sub?: string | null,
 };
 
-export type RaquetInput = {
-  brand?: string | null,
-  label?: string | null,
-  value?: string | null,
-};
-
-export type StringsInput = {
-  brand?: string | null,
-  label?: string | null,
-  value?: string | null,
-};
-
-export type ModelPlayerProfileConditionInput = {
+export type ModelPlayerConditionInput = {
   country?: ModelStringInput | null,
   province?: ModelStringInput | null,
   city?: ModelStringInput | null,
-  pic?: ModelStringInput | null,
+  racquet?: ModelStringInput | null,
+  strings?: ModelStringInput | null,
   level?: ModelFloatInput | null,
   active?: ModelBooleanInput | null,
-  following?: ModelStringInput | null,
-  followers?: ModelStringInput | null,
-  visiting?: ModelStringInput | null,
   Bio?: ModelStringInput | null,
-  sub?: ModelStringInput | null,
-  and?: Array< ModelPlayerProfileConditionInput | null > | null,
-  or?: Array< ModelPlayerProfileConditionInput | null > | null,
-  not?: ModelPlayerProfileConditionInput | null,
+  and?: Array< ModelPlayerConditionInput | null > | null,
+  or?: Array< ModelPlayerConditionInput | null > | null,
+  not?: ModelPlayerConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -107,77 +87,50 @@ export type ModelBooleanInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type PlayerProfile = {
-  __typename: "PlayerProfile",
-  id: string,
-  country?: string | null,
+export type Player = {
+  __typename: "Player",
+  userId: string,
+  country: string,
   province?: string | null,
   city?: string | null,
-  pic?: string | null,
-  raquet?: Raquet | null,
-  strings?: Strings | null,
-  level?: number | null,
-  active?: boolean | null,
-  following?: Array< string | null > | null,
-  followers?: Array< string | null > | null,
-  visiting?: string | null,
+  racquet?: string | null,
+  strings?: string | null,
+  level: number,
+  active: boolean,
   Bio?: string | null,
-  sub?: string | null,
   createdAt: string,
   updatedAt: string,
 };
 
-export type Raquet = {
-  __typename: "Raquet",
-  brand?: string | null,
-  label?: string | null,
-  value?: string | null,
-};
-
-export type Strings = {
-  __typename: "Strings",
-  brand?: string | null,
-  label?: string | null,
-  value?: string | null,
-};
-
-export type UpdatePlayerProfileInput = {
-  id: string,
+export type UpdatePlayerInput = {
+  userId: string,
   country?: string | null,
   province?: string | null,
   city?: string | null,
-  pic?: string | null,
-  raquet?: RaquetInput | null,
-  strings?: StringsInput | null,
+  racquet?: string | null,
+  strings?: string | null,
   level?: number | null,
   active?: boolean | null,
-  following?: Array< string | null > | null,
-  followers?: Array< string | null > | null,
-  visiting?: string | null,
   Bio?: string | null,
-  sub?: string | null,
 };
 
-export type DeletePlayerProfileInput = {
-  id: string,
+export type DeletePlayerInput = {
+  userId: string,
 };
 
-export type ModelPlayerProfileFilterInput = {
-  id?: ModelIDInput | null,
+export type ModelPlayerFilterInput = {
+  userId?: ModelIDInput | null,
   country?: ModelStringInput | null,
   province?: ModelStringInput | null,
   city?: ModelStringInput | null,
-  pic?: ModelStringInput | null,
+  racquet?: ModelStringInput | null,
+  strings?: ModelStringInput | null,
   level?: ModelFloatInput | null,
   active?: ModelBooleanInput | null,
-  following?: ModelStringInput | null,
-  followers?: ModelStringInput | null,
-  visiting?: ModelStringInput | null,
   Bio?: ModelStringInput | null,
-  sub?: ModelStringInput | null,
-  and?: Array< ModelPlayerProfileFilterInput | null > | null,
-  or?: Array< ModelPlayerProfileFilterInput | null > | null,
-  not?: ModelPlayerProfileFilterInput | null,
+  and?: Array< ModelPlayerFilterInput | null > | null,
+  or?: Array< ModelPlayerFilterInput | null > | null,
+  not?: ModelPlayerFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -196,27 +149,30 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelPlayerProfileConnection = {
-  __typename: "ModelPlayerProfileConnection",
-  items:  Array<PlayerProfile | null >,
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelPlayerConnection = {
+  __typename: "ModelPlayerConnection",
+  items:  Array<Player | null >,
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionPlayerProfileFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
+export type ModelSubscriptionPlayerFilterInput = {
+  userId?: ModelSubscriptionIDInput | null,
   country?: ModelSubscriptionStringInput | null,
   province?: ModelSubscriptionStringInput | null,
   city?: ModelSubscriptionStringInput | null,
-  pic?: ModelSubscriptionStringInput | null,
+  racquet?: ModelSubscriptionStringInput | null,
+  strings?: ModelSubscriptionStringInput | null,
   level?: ModelSubscriptionFloatInput | null,
   active?: ModelSubscriptionBooleanInput | null,
-  following?: ModelSubscriptionStringInput | null,
-  followers?: ModelSubscriptionStringInput | null,
-  visiting?: ModelSubscriptionStringInput | null,
   Bio?: ModelSubscriptionStringInput | null,
-  sub?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPlayerProfileFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPlayerProfileFilterInput | null > | null,
+  and?: Array< ModelSubscriptionPlayerFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPlayerFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -266,176 +222,115 @@ export type ModelSubscriptionBooleanInput = {
   eq?: boolean | null,
 };
 
-export type CreatePlayerProfileMutationVariables = {
-  input: CreatePlayerProfileInput,
-  condition?: ModelPlayerProfileConditionInput | null,
+export type CreatePlayerMutationVariables = {
+  input: CreatePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type CreatePlayerProfileMutation = {
-  createPlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type CreatePlayerMutation = {
+  createPlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdatePlayerProfileMutationVariables = {
-  input: UpdatePlayerProfileInput,
-  condition?: ModelPlayerProfileConditionInput | null,
+export type UpdatePlayerMutationVariables = {
+  input: UpdatePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type UpdatePlayerProfileMutation = {
-  updatePlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type UpdatePlayerMutation = {
+  updatePlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeletePlayerProfileMutationVariables = {
-  input: DeletePlayerProfileInput,
-  condition?: ModelPlayerProfileConditionInput | null,
+export type DeletePlayerMutationVariables = {
+  input: DeletePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type DeletePlayerProfileMutation = {
-  deletePlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type DeletePlayerMutation = {
+  deletePlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type GetPlayerProfileQueryVariables = {
-  id: string,
+export type GetPlayerQueryVariables = {
+  userId: string,
 };
 
-export type GetPlayerProfileQuery = {
-  getPlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type GetPlayerQuery = {
+  getPlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListPlayerProfilesQueryVariables = {
-  filter?: ModelPlayerProfileFilterInput | null,
+export type ListPlayersQueryVariables = {
+  userId?: string | null,
+  filter?: ModelPlayerFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
-export type ListPlayerProfilesQuery = {
-  listPlayerProfiles?:  {
-    __typename: "ModelPlayerProfileConnection",
+export type ListPlayersQuery = {
+  listPlayers?:  {
+    __typename: "ModelPlayerConnection",
     items:  Array< {
-      __typename: "PlayerProfile",
-      id: string,
-      country?: string | null,
+      __typename: "Player",
+      userId: string,
+      country: string,
       province?: string | null,
       city?: string | null,
-      pic?: string | null,
-      level?: number | null,
-      active?: boolean | null,
-      following?: Array< string | null > | null,
-      followers?: Array< string | null > | null,
-      visiting?: string | null,
+      racquet?: string | null,
+      strings?: string | null,
+      level: number,
+      active: boolean,
       Bio?: string | null,
-      sub?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -443,109 +338,64 @@ export type ListPlayerProfilesQuery = {
   } | null,
 };
 
-export type OnCreatePlayerProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionPlayerProfileFilterInput | null,
+export type OnCreatePlayerSubscriptionVariables = {
+  filter?: ModelSubscriptionPlayerFilterInput | null,
 };
 
-export type OnCreatePlayerProfileSubscription = {
-  onCreatePlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type OnCreatePlayerSubscription = {
+  onCreatePlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdatePlayerProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionPlayerProfileFilterInput | null,
+export type OnUpdatePlayerSubscriptionVariables = {
+  filter?: ModelSubscriptionPlayerFilterInput | null,
 };
 
-export type OnUpdatePlayerProfileSubscription = {
-  onUpdatePlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type OnUpdatePlayerSubscription = {
+  onUpdatePlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeletePlayerProfileSubscriptionVariables = {
-  filter?: ModelSubscriptionPlayerProfileFilterInput | null,
+export type OnDeletePlayerSubscriptionVariables = {
+  filter?: ModelSubscriptionPlayerFilterInput | null,
 };
 
-export type OnDeletePlayerProfileSubscription = {
-  onDeletePlayerProfile?:  {
-    __typename: "PlayerProfile",
-    id: string,
-    country?: string | null,
+export type OnDeletePlayerSubscription = {
+  onDeletePlayer?:  {
+    __typename: "Player",
+    userId: string,
+    country: string,
     province?: string | null,
     city?: string | null,
-    pic?: string | null,
-    raquet?:  {
-      __typename: "Raquet",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    strings?:  {
-      __typename: "Strings",
-      brand?: string | null,
-      label?: string | null,
-      value?: string | null,
-    } | null,
-    level?: number | null,
-    active?: boolean | null,
-    following?: Array< string | null > | null,
-    followers?: Array< string | null > | null,
-    visiting?: string | null,
+    racquet?: string | null,
+    strings?: string | null,
+    level: number,
+    active: boolean,
     Bio?: string | null,
-    sub?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,

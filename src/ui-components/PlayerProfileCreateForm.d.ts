@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SwitchFieldProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -25,27 +25,19 @@ export declare type PlayerProfileCreateFormInputValues = {
     country?: string;
     province?: string;
     city?: string;
-    pic?: string;
     level?: number;
     active?: boolean;
-    following?: string[];
-    followers?: string[];
-    visiting?: string;
     Bio?: string;
-    sub?: string;
+    userId?: string;
 };
 export declare type PlayerProfileCreateFormValidationValues = {
     country?: ValidationFunction<string>;
     province?: ValidationFunction<string>;
     city?: ValidationFunction<string>;
-    pic?: ValidationFunction<string>;
     level?: ValidationFunction<number>;
     active?: ValidationFunction<boolean>;
-    following?: ValidationFunction<string>;
-    followers?: ValidationFunction<string>;
-    visiting?: ValidationFunction<string>;
     Bio?: ValidationFunction<string>;
-    sub?: ValidationFunction<string>;
+    userId?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type PlayerProfileCreateFormOverridesProps = {
@@ -53,14 +45,10 @@ export declare type PlayerProfileCreateFormOverridesProps = {
     country?: PrimitiveOverrideProps<TextFieldProps>;
     province?: PrimitiveOverrideProps<TextFieldProps>;
     city?: PrimitiveOverrideProps<TextFieldProps>;
-    pic?: PrimitiveOverrideProps<TextFieldProps>;
     level?: PrimitiveOverrideProps<TextFieldProps>;
     active?: PrimitiveOverrideProps<SwitchFieldProps>;
-    following?: PrimitiveOverrideProps<TextAreaFieldProps>;
-    followers?: PrimitiveOverrideProps<TextAreaFieldProps>;
-    visiting?: PrimitiveOverrideProps<TextFieldProps>;
     Bio?: PrimitiveOverrideProps<TextFieldProps>;
-    sub?: PrimitiveOverrideProps<TextFieldProps>;
+    userId?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type PlayerProfileCreateFormProps = React.PropsWithChildren<{
     overrides?: PlayerProfileCreateFormOverridesProps | undefined | null;

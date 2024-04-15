@@ -15,13 +15,13 @@ import {
 } from "@aws-amplify/ui-react";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { generateClient } from "aws-amplify/api";
-import { getPlayerProfile } from "../graphql/queries";
-import { updatePlayerProfile } from "../graphql/mutations";
+import { getPlayer } from "../graphql/queries";
+import { updatePlayer } from "../graphql/mutations";
 const client = generateClient();
-export default function PlayerProfileUpdateForm(props) {
+export default function PlayerUpdateForm(props) {
   const {
-    id: idProp,
-    playerProfile: playerProfileModelProp,
+    userId: userIdProp,
+    player: playerModelProp,
     onSuccess,
     onError,
     onSubmit,
@@ -31,61 +31,67 @@ export default function PlayerProfileUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
+    userId: "",
     country: "",
     province: "",
     city: "",
+    racquet: "",
+    strings: "",
     level: "",
     active: false,
     Bio: "",
-    userId: "",
   };
+  const [userId, setUserId] = React.useState(initialValues.userId);
   const [country, setCountry] = React.useState(initialValues.country);
   const [province, setProvince] = React.useState(initialValues.province);
   const [city, setCity] = React.useState(initialValues.city);
+  const [racquet, setRacquet] = React.useState(initialValues.racquet);
+  const [strings, setStrings] = React.useState(initialValues.strings);
   const [level, setLevel] = React.useState(initialValues.level);
   const [active, setActive] = React.useState(initialValues.active);
   const [Bio, setBio] = React.useState(initialValues.Bio);
-  const [userId, setUserId] = React.useState(initialValues.userId);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    const cleanValues = playerProfileRecord
-      ? { ...initialValues, ...playerProfileRecord }
+    const cleanValues = playerRecord
+      ? { ...initialValues, ...playerRecord }
       : initialValues;
+    setUserId(cleanValues.userId);
     setCountry(cleanValues.country);
     setProvince(cleanValues.province);
     setCity(cleanValues.city);
+    setRacquet(cleanValues.racquet);
+    setStrings(cleanValues.strings);
     setLevel(cleanValues.level);
     setActive(cleanValues.active);
     setBio(cleanValues.Bio);
-    setUserId(cleanValues.userId);
     setErrors({});
   };
-  const [playerProfileRecord, setPlayerProfileRecord] = React.useState(
-    playerProfileModelProp
-  );
+  const [playerRecord, setPlayerRecord] = React.useState(playerModelProp);
   React.useEffect(() => {
     const queryData = async () => {
-      const record = idProp
+      const record = userIdProp
         ? (
             await client.graphql({
-              query: getPlayerProfile.replaceAll("__typename", ""),
-              variables: { id: idProp },
+              query: getPlayer.replaceAll("__typename", ""),
+              variables: { userId: userIdProp },
             })
-          )?.data?.getPlayerProfile
-        : playerProfileModelProp;
-      setPlayerProfileRecord(record);
+          )?.data?.getPlayer
+        : playerModelProp;
+      setPlayerRecord(record);
     };
     queryData();
-  }, [idProp, playerProfileModelProp]);
-  React.useEffect(resetStateValues, [playerProfileRecord]);
+  }, [userIdProp, playerModelProp]);
+  React.useEffect(resetStateValues, [playerRecord]);
   const validations = {
+    userId: [{ type: "Required" }],
     country: [{ type: "Required" }],
     province: [],
-    city: [{ type: "Required" }],
+    city: [],
+    racquet: [],
+    strings: [],
     level: [{ type: "Required" }],
     active: [{ type: "Required" }],
     Bio: [],
-    userId: [{ type: "Required" }],
   };
   const runValidationTasks = async (
     fieldName,
@@ -113,13 +119,15 @@ export default function PlayerProfileUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
+          userId,
           country,
           province: province ?? null,
-          city,
+          city: city ?? null,
+          racquet: racquet ?? null,
+          strings: strings ?? null,
           level,
           active,
           Bio: Bio ?? null,
-          userId,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -150,10 +158,10 @@ export default function PlayerProfileUpdateForm(props) {
             }
           });
           await client.graphql({
-            query: updatePlayerProfile.replaceAll("__typename", ""),
+            query: updatePlayer.replaceAll("__typename", ""),
             variables: {
               input: {
-                id: playerProfileRecord.id,
+                userId: playerRecord.userId,
                 ...modelFields,
               },
             },
@@ -168,9 +176,41 @@ export default function PlayerProfileUpdateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "PlayerProfileUpdateForm")}
+      {...getOverrideProps(overrides, "PlayerUpdateForm")}
       {...rest}
     >
+      <TextField
+        label="User id"
+        isRequired={true}
+        isReadOnly={true}
+        value={userId}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userId: value,
+              country,
+              province,
+              city,
+              racquet,
+              strings,
+              level,
+              active,
+              Bio,
+            };
+            const result = onChange(modelFields);
+            value = result?.userId ?? value;
+          }
+          if (errors.userId?.hasError) {
+            runValidationTasks("userId", value);
+          }
+          setUserId(value);
+        }}
+        onBlur={() => runValidationTasks("userId", userId)}
+        errorMessage={errors.userId?.errorMessage}
+        hasError={errors.userId?.hasError}
+        {...getOverrideProps(overrides, "userId")}
+      ></TextField>
       <TextField
         label="Country"
         isRequired={true}
@@ -180,13 +220,15 @@ export default function PlayerProfileUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              userId,
               country: value,
               province,
               city,
+              racquet,
+              strings,
               level,
               active,
               Bio,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.country ?? value;
@@ -210,13 +252,15 @@ export default function PlayerProfileUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              userId,
               country,
               province: value,
               city,
+              racquet,
+              strings,
               level,
               active,
               Bio,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.province ?? value;
@@ -233,20 +277,22 @@ export default function PlayerProfileUpdateForm(props) {
       ></TextField>
       <TextField
         label="City"
-        isRequired={true}
+        isRequired={false}
         isReadOnly={false}
         value={city}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              userId,
               country,
               province,
               city: value,
+              racquet,
+              strings,
               level,
               active,
               Bio,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.city ?? value;
@@ -262,6 +308,70 @@ export default function PlayerProfileUpdateForm(props) {
         {...getOverrideProps(overrides, "city")}
       ></TextField>
       <TextField
+        label="Racquet"
+        isRequired={false}
+        isReadOnly={false}
+        value={racquet}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userId,
+              country,
+              province,
+              city,
+              racquet: value,
+              strings,
+              level,
+              active,
+              Bio,
+            };
+            const result = onChange(modelFields);
+            value = result?.racquet ?? value;
+          }
+          if (errors.racquet?.hasError) {
+            runValidationTasks("racquet", value);
+          }
+          setRacquet(value);
+        }}
+        onBlur={() => runValidationTasks("racquet", racquet)}
+        errorMessage={errors.racquet?.errorMessage}
+        hasError={errors.racquet?.hasError}
+        {...getOverrideProps(overrides, "racquet")}
+      ></TextField>
+      <TextField
+        label="Strings"
+        isRequired={false}
+        isReadOnly={false}
+        value={strings}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userId,
+              country,
+              province,
+              city,
+              racquet,
+              strings: value,
+              level,
+              active,
+              Bio,
+            };
+            const result = onChange(modelFields);
+            value = result?.strings ?? value;
+          }
+          if (errors.strings?.hasError) {
+            runValidationTasks("strings", value);
+          }
+          setStrings(value);
+        }}
+        onBlur={() => runValidationTasks("strings", strings)}
+        errorMessage={errors.strings?.errorMessage}
+        hasError={errors.strings?.hasError}
+        {...getOverrideProps(overrides, "strings")}
+      ></TextField>
+      <TextField
         label="Level"
         isRequired={true}
         isReadOnly={false}
@@ -274,13 +384,15 @@ export default function PlayerProfileUpdateForm(props) {
             : parseFloat(e.target.value);
           if (onChange) {
             const modelFields = {
+              userId,
               country,
               province,
               city,
+              racquet,
+              strings,
               level: value,
               active,
               Bio,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.level ?? value;
@@ -304,13 +416,15 @@ export default function PlayerProfileUpdateForm(props) {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
+              userId,
               country,
               province,
               city,
+              racquet,
+              strings,
               level,
               active: value,
               Bio,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.active ?? value;
@@ -334,13 +448,15 @@ export default function PlayerProfileUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
+              userId,
               country,
               province,
               city,
+              racquet,
+              strings,
               level,
               active,
               Bio: value,
-              userId,
             };
             const result = onChange(modelFields);
             value = result?.Bio ?? value;
@@ -355,36 +471,6 @@ export default function PlayerProfileUpdateForm(props) {
         hasError={errors.Bio?.hasError}
         {...getOverrideProps(overrides, "Bio")}
       ></TextField>
-      <TextField
-        label="User id"
-        isRequired={true}
-        isReadOnly={false}
-        value={userId}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              country,
-              province,
-              city,
-              level,
-              active,
-              Bio,
-              userId: value,
-            };
-            const result = onChange(modelFields);
-            value = result?.userId ?? value;
-          }
-          if (errors.userId?.hasError) {
-            runValidationTasks("userId", value);
-          }
-          setUserId(value);
-        }}
-        onBlur={() => runValidationTasks("userId", userId)}
-        errorMessage={errors.userId?.errorMessage}
-        hasError={errors.userId?.hasError}
-        {...getOverrideProps(overrides, "userId")}
-      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
@@ -396,7 +482,7 @@ export default function PlayerProfileUpdateForm(props) {
             event.preventDefault();
             resetStateValues();
           }}
-          isDisabled={!(idProp || playerProfileModelProp)}
+          isDisabled={!(userIdProp || playerModelProp)}
           {...getOverrideProps(overrides, "ResetButton")}
         ></Button>
         <Flex
@@ -408,7 +494,7 @@ export default function PlayerProfileUpdateForm(props) {
             type="submit"
             variation="primary"
             isDisabled={
-              !(idProp || playerProfileModelProp) ||
+              !(userIdProp || playerModelProp) ||
               Object.values(errors).some((e) => e?.hasError)
             }
             {...getOverrideProps(overrides, "SubmitButton")}
