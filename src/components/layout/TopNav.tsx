@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import {
   Navbar,
   NavbarBrand,
@@ -28,6 +28,11 @@ export default function TopNav() {
       <NavbarCollapse>
         <NavLink to="/" text={"Home"}></NavLink>
         <NavLink to="/" text={"About"}></NavLink>
+        <div className="w-full font-medium rounded-full p-[3px] mx-auto text-sm text-center ">
+          <div className="w-full bg-white dark:bg-gray-800 text-black dark:text-white rounded-full p-[11px] hover:bg-yellow-100">
+            <div className="items-center">Logout</div>
+          </div>
+        </div>
       </NavbarCollapse>
     </Navbar>
   );

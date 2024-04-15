@@ -52,7 +52,7 @@ export default function Login() {
         });
 
         useUser();
-        router.push("/user");
+        router.push("/user/profile");
       } catch (error) {
         setError(
           error.message === "User does not exist."
@@ -60,7 +60,7 @@ export default function Login() {
             : error.message
         );
         if (error.message === "There is already a signed in user.")
-          router.push("/user");
+          router.push("/user/profile");
         if (!error.message) setError("Error signing in.");
         setIsLoading(false);
       }

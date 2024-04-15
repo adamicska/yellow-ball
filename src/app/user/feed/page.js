@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "aws-amplify/auth";
 
-export default function page() {
+export default function feed() {
   const [user, setUser] = useState({});
 
   async function getUser() {
@@ -17,5 +17,9 @@ export default function page() {
 
   // If no profile, create profile with Formik, step profile (can skip)
   // Add logout to menu bar
-  return <div className="min-h-screen">Hello {user.username}</div>;
+  return (
+    <div className="min-h-screen">
+      Hello {user.username}. This is the Feed view
+    </div>
+  );
 }

@@ -12,7 +12,8 @@ import Footer from "../components/layout/FooterNav";
 
 export const metadata = {
   title: "YellowBall",
-  description: "Join YellowBall Club to play tennis, meet new players, compete and earn!",
+  description:
+    "Join YellowBall Club to play tennis, meet new players, compete and earn!",
 };
 
 const jsonLd = {
@@ -46,7 +47,6 @@ export default function RootLayout({
             {children}
             <Footer />
           </ContextProvider>
-          {/* Add Navigation */}
         </div>
       </body>
     </html>
