@@ -22,7 +22,8 @@ export default function TopNav() {
         </span> */}
       </NavbarBrand>
       <div className="flex md:order-2">
-        <Button text={"Get started"} to={"/auth/signup"} />
+        <div className="hidden lg:block"><Button text={"Get started"} to={"/auth/signup"} /></div>
+        
         <NavbarToggle />
       </div>
       <NavbarCollapse>

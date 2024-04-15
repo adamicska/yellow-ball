@@ -38,7 +38,7 @@ export default function Home() {
             </span>{" "}
             players
           </h2>
-          <p className="mt-3 text-base text-gray-500 sm:py-5 sm:text-lg sm:max-w-xl md:text-xl mx-auto">
+          <p className="mt-3 text-base text-gray-600 sm:py-5 sm:text-lg sm:max-w-xl md:text-xl mx-auto">
             Look for other tennis players near you today! You can see who plays
             in your town, make new friends, search by level, find a coach,
             organize tournaments, and more!
@@ -96,7 +96,7 @@ export default function Home() {
             <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-black dark:text-gray-100 sm:text-4xl">
               A better way to play tennis
             </p>
-            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+            <p className="mt-4 max-w-2xl text-xl text-gray-600 lg:mx-auto">
               Lorem ipsum dolor sit amet consect adipisicing elit. Possimus
               magnam voluptatum cupiditate veritatis in accusamus quisquam.
             </p>
@@ -110,18 +110,18 @@ export default function Home() {
                   className="relative shadow rounded-md p-8 hover:border hover:border-gray-700"
                 >
                   <dt>
-                    <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-black text-white">
+                    <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-withe text-black">
                       <div
                         className="h-6 w-6"
                         dangerouslySetInnerHTML={{ __html: feature.icon }}
                       ></div>
                       {/* <feature.icon className="h-6 w-6" aria-hidden="true" /> */}
                     </div>
-                    <p className="ml-16 text-lg leading-6 font-medium text-gray-100">
+                    <p className="ml-16 text-lg leading-6 font-medium text-yellow-500">
                       {feature.name}
                     </p>
                   </dt>
-                  <dd className="mt-2 ml-16 text-base text-gray-500">
+                  <dd className="mt-2 ml-16 text-base text-gray-600">
                     {feature.description}
                   </dd>
                 </div>
