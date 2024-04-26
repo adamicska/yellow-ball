@@ -1,5 +1,7 @@
-type Player @model @auth(rules: [{allow: public}]) {
+type Player @model @auth(rules: [{ allow: public }]) {
   userId: ID! @primaryKey
+  username: String
+  ranking: Int
   country: String!
   province: String
   city: String
@@ -10,5 +12,23 @@ type Player @model @auth(rules: [{allow: public}]) {
   Bio: String
 }
 
+# Add chatroom type with list of users connected to Profile and Message
 
- 
+type Message
+  @model
+  @auth(
+    rules: [
+      # Allow signed in users to perform all actions
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  owner: String!
+  message: String!
+   @index(
+      name: "messagesByDate"
+      queryField: "messagesByDate"
+      sortKeyFields: ["createdAt"]
+    )
+  createdAt: String!
+}

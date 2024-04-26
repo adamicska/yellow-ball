@@ -4,6 +4,8 @@
  * Any changes to this file will be overwritten when running amplify pull. *
  **************************************************************************/
 
+export { default as MessageCreateForm } from "./MessageCreateForm";
+export { default as MessageUpdateForm } from "./MessageUpdateForm";
 export { default as PlayerCreateForm } from "./PlayerCreateForm";
 export { default as PlayerUpdateForm } from "./PlayerUpdateForm";
 export { default as studioTheme } from "./studioTheme";

@@ -14,6 +14,8 @@ export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
 ) {
   createPlayer(input: $input, condition: $condition) {
     userId
+    username
+    ranking
     country
     province
     city
@@ -37,6 +39,8 @@ export const updatePlayer = /* GraphQL */ `mutation UpdatePlayer(
 ) {
   updatePlayer(input: $input, condition: $condition) {
     userId
+    username
+    ranking
     country
     province
     city
@@ -60,6 +64,8 @@ export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
 ) {
   deletePlayer(input: $input, condition: $condition) {
     userId
+    username
+    ranking
     country
     province
     city
@@ -76,4 +82,55 @@ export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
 ` as GeneratedMutation<
   APITypes.DeletePlayerMutationVariables,
   APITypes.DeletePlayerMutation
+>;
+export const createMessage = /* GraphQL */ `mutation CreateMessage(
+  $input: CreateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  createMessage(input: $input, condition: $condition) {
+    id
+    owner
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateMessageMutationVariables,
+  APITypes.CreateMessageMutation
+>;
+export const updateMessage = /* GraphQL */ `mutation UpdateMessage(
+  $input: UpdateMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  updateMessage(input: $input, condition: $condition) {
+    id
+    owner
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateMessageMutationVariables,
+  APITypes.UpdateMessageMutation
+>;
+export const deleteMessage = /* GraphQL */ `mutation DeleteMessage(
+  $input: DeleteMessageInput!
+  $condition: ModelMessageConditionInput
+) {
+  deleteMessage(input: $input, condition: $condition) {
+    id
+    owner
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteMessageMutationVariables,
+  APITypes.DeleteMessageMutation
 >;

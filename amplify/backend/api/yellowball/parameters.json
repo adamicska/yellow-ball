@@ -2,5 +2,11 @@
   "AppSyncApiName": "yellowball",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2024-04-15T17:41:52.975Z"
+  "AuthModeLastUpdated": "2024-04-15T17:41:52.975Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authyellowballba708a54",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

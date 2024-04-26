@@ -30,6 +30,8 @@ export default function PlayerCreateForm(props) {
   } = props;
   const initialValues = {
     userId: "",
+    username: "",
+    ranking: "",
     country: "",
     province: "",
     city: "",
@@ -40,6 +42,8 @@ export default function PlayerCreateForm(props) {
     Bio: "",
   };
   const [userId, setUserId] = React.useState(initialValues.userId);
+  const [username, setUsername] = React.useState(initialValues.username);
+  const [ranking, setRanking] = React.useState(initialValues.ranking);
   const [country, setCountry] = React.useState(initialValues.country);
   const [province, setProvince] = React.useState(initialValues.province);
   const [city, setCity] = React.useState(initialValues.city);
@@ -51,6 +55,8 @@ export default function PlayerCreateForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setUserId(initialValues.userId);
+    setUsername(initialValues.username);
+    setRanking(initialValues.ranking);
     setCountry(initialValues.country);
     setProvince(initialValues.province);
     setCity(initialValues.city);
@@ -63,6 +69,8 @@ export default function PlayerCreateForm(props) {
   };
   const validations = {
     userId: [{ type: "Required" }],
+    username: [],
+    ranking: [],
     country: [{ type: "Required" }],
     province: [],
     city: [],
@@ -99,6 +107,8 @@ export default function PlayerCreateForm(props) {
         event.preventDefault();
         let modelFields = {
           userId,
+          username,
+          ranking,
           country,
           province,
           city,
@@ -170,6 +180,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId: value,
+              username,
+              ranking,
               country,
               province,
               city,
@@ -193,6 +205,78 @@ export default function PlayerCreateForm(props) {
         {...getOverrideProps(overrides, "userId")}
       ></TextField>
       <TextField
+        label="Username"
+        isRequired={false}
+        isReadOnly={false}
+        value={username}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              userId,
+              username: value,
+              ranking,
+              country,
+              province,
+              city,
+              racquet,
+              strings,
+              level,
+              active,
+              Bio,
+            };
+            const result = onChange(modelFields);
+            value = result?.username ?? value;
+          }
+          if (errors.username?.hasError) {
+            runValidationTasks("username", value);
+          }
+          setUsername(value);
+        }}
+        onBlur={() => runValidationTasks("username", username)}
+        errorMessage={errors.username?.errorMessage}
+        hasError={errors.username?.hasError}
+        {...getOverrideProps(overrides, "username")}
+      ></TextField>
+      <TextField
+        label="Ranking"
+        isRequired={false}
+        isReadOnly={false}
+        type="number"
+        step="any"
+        value={ranking}
+        onChange={(e) => {
+          let value = isNaN(parseInt(e.target.value))
+            ? e.target.value
+            : parseInt(e.target.value);
+          if (onChange) {
+            const modelFields = {
+              userId,
+              username,
+              ranking: value,
+              country,
+              province,
+              city,
+              racquet,
+              strings,
+              level,
+              active,
+              Bio,
+            };
+            const result = onChange(modelFields);
+            value = result?.ranking ?? value;
+          }
+          if (errors.ranking?.hasError) {
+            runValidationTasks("ranking", value);
+          }
+          setRanking(value);
+        }}
+        onBlur={() => runValidationTasks("ranking", ranking)}
+        errorMessage={errors.ranking?.errorMessage}
+        hasError={errors.ranking?.hasError}
+        {...getOverrideProps(overrides, "ranking")}
+      ></TextField>
+      <TextField
         label="Country"
         isRequired={true}
         isReadOnly={false}
@@ -202,6 +286,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country: value,
               province,
               city,
@@ -234,6 +320,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province: value,
               city,
@@ -266,6 +354,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city: value,
@@ -298,6 +388,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city,
@@ -330,6 +422,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city,
@@ -366,6 +460,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city,
@@ -398,6 +494,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city,
@@ -430,6 +528,8 @@ export default function PlayerCreateForm(props) {
           if (onChange) {
             const modelFields = {
               userId,
+              username,
+              ranking,
               country,
               province,
               city,

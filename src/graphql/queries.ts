@@ -11,6 +11,8 @@ type GeneratedQuery<InputType, OutputType> = string & {
 export const getPlayer = /* GraphQL */ `query GetPlayer($userId: ID!) {
   getPlayer(userId: $userId) {
     userId
+    username
+    ranking
     country
     province
     city
@@ -41,6 +43,8 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
   ) {
     items {
       userId
+      username
+      ranking
       country
       province
       city
@@ -60,4 +64,40 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
 ` as GeneratedQuery<
   APITypes.ListPlayersQueryVariables,
   APITypes.ListPlayersQuery
+>;
+export const getMessage = /* GraphQL */ `query GetMessage($id: ID!) {
+  getMessage(id: $id) {
+    id
+    owner
+    message
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetMessageQueryVariables,
+  APITypes.GetMessageQuery
+>;
+export const listMessages = /* GraphQL */ `query ListMessages(
+  $filter: ModelMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      owner
+      message
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListMessagesQueryVariables,
+  APITypes.ListMessagesQuery
 >;

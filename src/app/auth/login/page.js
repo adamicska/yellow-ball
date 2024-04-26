@@ -1,10 +1,10 @@
 "use client";
 import { useContext, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signIn, fetchAuthSession } from "aws-amplify/auth";
+import { useRouter } from "next/navigation";
+import { signIn, getCurrentUser } from "aws-amplify/auth";
 import { AuthContext } from "../../../context/AuthContext";
-import { ProfileContext } from "../../../context/ProfileContext";
+// import { ProfileContext } from "../../../context/ProfileContext";
 
 import Card from "../../../components/common/Card";
 import LoaderButton from "../../../components/common/LoaderButton";
@@ -13,7 +13,7 @@ import Input from "../../../components/common/Input";
 export default function Login() {
   const router = useRouter();
 
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   // const username = searchParams.get("user");
 
   const [user, setUser] = useContext(AuthContext);
@@ -27,11 +27,10 @@ export default function Login() {
 
   async function useUser() {
     try {
-      const session = await fetchAuthSession();
-      const t = session?.tokens?.idToken?.toString();
-      setUser(t);
-      // console.log("session", t);
-      return t;
+      const user = await getCurrentUser();
+      setUser(user);
+      router.push(`/user/${user?.userId}/profile/`);
+      return user;
     } catch (e) {
       console.log(e);
     }
@@ -50,9 +49,8 @@ export default function Login() {
           username,
           password,
         });
-
+        // console.log("login", login);
         useUser();
-        router.push(`/user/${username}/profile/`);
       } catch (error) {
         setError(
           error.message === "User does not exist."

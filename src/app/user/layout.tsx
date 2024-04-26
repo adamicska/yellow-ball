@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { getCurrentUser } from "aws-amplify/auth";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <div className="static min-h-screen bg-white dark:bg-gray-800">
       <div className="pt-20 px-4">{children}</div>
-      <FooterMobileNav />
+      <FooterMobileNav userId={user.userId} />
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default function Signup() {
           },
         });
 
-        console.log(userId);
+        // console.log(userId);
         router.push(`/auth/verify-email?user=${email}`);
 
         setIsLoading(false);
