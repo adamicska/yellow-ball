@@ -10,9 +10,15 @@ type Player @model @auth(rules: [{ allow: public }]) {
   level: Float!
   active: Boolean!
   Bio: String
+  chats: [Chat!]!
 }
 
-# Add chatroom type with list of users connected to Profile and Message
+type Chat {
+  id: ID!
+  name: String!
+  players: [Player!]!
+  messages: [Message!]!
+}
 
 type Message
   @model
@@ -23,7 +29,7 @@ type Message
     ]
   ) {
   id: ID!
-  owner: String!
+  owner: Player!
   message: String!
    @index(
       name: "messagesByDate"

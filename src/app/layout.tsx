@@ -3,7 +3,6 @@ import ContextProvider from "../context/ContextProvider";
 import "./globals.css";
 // import localFont from "next/font/local";
 import TopNav from "../components/layout/TopNav";
-import Footer from "../components/layout/FooterNav";
 
 // const geoFont = localFont({
 //   src: "../styles/",
@@ -45,7 +44,6 @@ export default function RootLayout({
           <ContextProvider>
             <TopNav />
             {children}
-            <Footer />
           </ContextProvider>
         </div>
       </body>

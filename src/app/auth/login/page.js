@@ -57,8 +57,7 @@ export default function Login() {
             ? "Incorrect username or password."
             : error.message
         );
-        if (error.message === "There is already a signed in user.")
-          router.push(`/user/${username}/profile/`);
+        if (error.message === "There is already a signed in user.") useUser();
         if (!error.message) setError("Error signing in.");
         setIsLoading(false);
       }
